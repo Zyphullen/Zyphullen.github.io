@@ -6,7 +6,520 @@
   <title>Zyphullen — Nothing is impossible</title>
   <meta name="description" content="Zyphullen — Autistic Glitch · Roleplay King · Telepathic Mirror. Nothing is impossible." />
   <link rel="icon" href="assets/phoenix.jpg" type="image/jpeg" />
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+/* Zyphullen hub — cosmic void */
+:root {
+  --void: #05050e;
+  --void-deep: #0a0a18;
+  --indigo: #1a0a3e;
+  --indigo-mid: #2d1b69;
+  --gold: #ffd700;
+  --gold-soft: #e8c547;
+  --turquoise: #00e5c0;
+  --turquoise-dim: #00b89a;
+  --text: #e8e6f0;
+  --muted: #9a96b0;
+  --card: rgba(26, 10, 62, 0.55);
+  --border: rgba(0, 229, 192, 0.18);
+  --glow-gold: 0 0 20px rgba(255, 215, 0, 0.45), 0 0 40px rgba(255, 215, 0, 0.2);
+  --glow-turq: 0 0 16px rgba(0, 229, 192, 0.4);
+  --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--void);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+#stars {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.geometry {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(45, 27, 105, 0.35), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0, 229, 192, 0.06), transparent 50%),
+    radial-gradient(ellipse 40% 30% at 15% 70%, rgba(255, 215, 0, 0.05), transparent 50%);
+  opacity: 0.9;
+}
+
+.geometry::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(90vw, 700px);
+  height: min(90vw, 700px);
+  transform: translate(-50%, -50%);
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      transparent 0deg 10deg,
+      rgba(0, 229, 192, 0.03) 10deg 12deg
+    );
+  border-radius: 50%;
+  mask-image: radial-gradient(circle, transparent 30%, black 45%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle, transparent 30%, black 45%, transparent 70%);
+  animation: spin 120s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Nav */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.5rem;
+  background: rgba(5, 5, 14, 0.75);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-shadow: var(--glow-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(255, 120, 40, 0.5), 0 0 16px rgba(255, 200, 80, 0.3);
+  flex-shrink: 0;
+}
+
+.nav nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.nav a:hover { color: var(--turquoise); }
+.nav a:focus-visible,
+.feature-card:focus-visible,
+.card-link:focus-visible,
+.x-link:focus-visible {
+  outline: 2px solid var(--turquoise);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem 4rem;
+}
+
+.phoenix {
+  width: clamp(340px, 28vw, 420px);
+  height: clamp(340px, 28vw, 420px);
+  margin-bottom: 1.25rem;
+  animation: float 6s ease-in-out infinite;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 0 26px rgba(255, 120, 40, 0.55)) drop-shadow(0 0 52px rgba(255, 60, 0, 0.35)) drop-shadow(0 0 18px rgba(255, 200, 80, 0.3));
+}
+
+.phoenix-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  -webkit-mask-image: radial-gradient(circle, #000 52%, transparent 72%);
+  mask-image: radial-gradient(circle, #000 52%, transparent 72%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.glow-title {
+  font-size: clamp(2.8rem, 10vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  background: linear-gradient(135deg, var(--gold), #fff3a0, var(--turquoise), var(--gold));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));
+  animation: shimmer 8s ease infinite;
+  margin-bottom: 0.5rem;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.tagline {
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: var(--gold-soft);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-shadow: var(--glow-gold);
+}
+
+.acrostic-label {
+  color: var(--turquoise-dim);
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  opacity: 0.85;
+}
+
+/* Sections */
+.section, .hero {
+  scroll-margin-top: 4.5rem;
+}
+
+.section {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 0.08em;
+  text-shadow: var(--glow-gold);
+}
+
+/* Bio cards */
+.bio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.bio-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.bio-card:hover {
+  border-color: var(--turquoise);
+  box-shadow: var(--glow-turq);
+  transform: translateY(-3px);
+}
+
+.bio-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--indigo-mid), var(--indigo));
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+  box-shadow: var(--glow-gold);
+}
+
+.bio-card h3 {
+  font-size: 0.95rem;
+  color: var(--turquoise);
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.bio-card p {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* Feature cards */
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.feature-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(26, 10, 62, 0.7), rgba(10, 10, 24, 0.8));
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 16px;
+  padding: 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+}
+
+.feature-card:hover {
+  border-color: var(--gold);
+  box-shadow: var(--glow-gold), 0 0 40px rgba(0, 229, 192, 0.15);
+  transform: translateY(-4px);
+}
+
+.feature-card.has-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+  padding: 0;
+  overflow: hidden;
+  align-items: stretch;
+  gap: 0;
+}
+
+.feature-media {
+  position: relative;
+  min-height: 220px;
+  background: #080814;
+  overflow: hidden;
+}
+
+.feature-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+.feature-media img.media-top {
+  object-position: center 22%;
+}
+@media (max-width: 700px) {
+  .feature-media img.media-top { object-position: center top; }
+}
+
+.feature-card.has-media .feature-body {
+  padding: 1.5rem 1.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--void);
+  background: var(--turquoise);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  width: max-content;
+}
+
+.badge-game {
+  background: var(--gold);
+}
+
+.feature-body h3 {
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.feature-body p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.cta {
+  color: var(--turquoise);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.card-grid.coming {
+  margin-top: 1.25rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.card:hover {
+  border-color: rgba(255, 215, 0, 0.35);
+  box-shadow: 0 0 24px rgba(0, 229, 192, 0.12);
+  transform: translateY(-3px);
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 0 8px rgba(0, 229, 192, 0.4));
+}
+
+.soon {
+  display: inline-block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.card p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.idea-card h3 { color: var(--turquoise); }
+
+/* Footer */
+.footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+.x-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  transition: color 0.2s;
+}
+
+.x-link:hover { color: var(--turquoise); }
+
+.footer-tag {
+  color: var(--gold-soft);
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  text-shadow: var(--glow-gold);
+}
+
+@media (min-width: 800px) {
+  .bio-grid { grid-template-columns: repeat(6, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .feature-card.has-media {
+    grid-template-columns: 1fr;
+  }
+  .feature-media {
+    min-height: 0;
+    aspect-ratio: 1200 / 630;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav { padding: 0.7rem 0.9rem; }
+  .nav nav { gap: 0.55rem; }
+  .nav a { font-size: 0.72rem; }
+  .logo { font-size: 1rem; }
+  .bio-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature-card { flex-direction: column; text-align: center; }
+  .feature-card.has-media { display: grid; text-align: left; }
+  .feature-card.has-media .feature-body { text-align: left; }
+  .section { padding: 3rem 1rem; }
+  .phoenix {
+    width: 240px;
+    height: 240px;
+  }
+  .logo-icon { width: 24px; height: 24px; }
+  .feature-body h3 { font-size: 1.3rem; }
+}
+  </style>
 </head>
 <body>
   <canvas id="stars" aria-hidden="true"></canvas>
@@ -16,7 +529,7 @@
     <a class="logo" href="#hero"><img class="logo-icon" src="assets/phoenix.jpg" alt="" width="28" height="28" /><span>Zyphullen</span></a>
     <nav>
       <a href="#about">About</a>
-      <a href="#project">Project</a>
+      <a href="#project">Projects</a>
       <a href="#games">Games</a>
       <a href="#ideas">Ideas</a>
     </nav>
@@ -26,7 +539,6 @@
   <section id="hero" class="hero">
     <div class="phoenix" aria-hidden="true">
       <img class="phoenix-img" src="assets/phoenix.jpg" alt="" width="1024" height="1024" />
-    </div>
     </div>
     <h1 class="glow-title">Zyphullen</h1>
     <p class="tagline">Nothing is impossible.</p>
@@ -69,41 +581,50 @@
     </div>
   </section>
 
-  <!-- FEATURED PROJECT -->
+  <!-- FEATURED PROJECTS -->
   <section id="project" class="section">
     <h2 class="section-title">Featured</h2>
-    <a class="feature-card" href="https://zyphullen.github.io/from-nothing-to-us/" target="_blank" rel="noopener">
-      <div class="feature-icon" aria-hidden="true">
-        <svg viewBox="0 0 120 120">
-          <defs>
-            <radialGradient id="voidg" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#00e5c0"/>
-              <stop offset="40%" stop-color="#4b0082"/>
-              <stop offset="100%" stop-color="#0a0a14"/>
-            </radialGradient>
-          </defs>
-          <circle cx="60" cy="60" r="50" fill="url(#voidg)" opacity="0.9"/>
-          <circle cx="60" cy="60" r="8" fill="#ffd700"/>
-          <circle cx="60" cy="60" r="20" fill="none" stroke="#00e5c0" stroke-width="1" opacity="0.6"/>
-          <circle cx="60" cy="60" r="35" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
-          <circle cx="85" cy="40" r="3" fill="#00e5c0"/>
-          <circle cx="35" cy="75" r="2.5" fill="#ffd700"/>
-          <circle cx="70" cy="85" r="2" fill="#fff" opacity="0.7"/>
-        </svg>
-      </div>
-      <div class="feature-body">
-        <span class="badge">Interactive</span>
-        <h3>From Nothing to Us</h3>
-        <p>A cosmic map of emergence — from void to us.</p>
-        <span class="cta">Enter the map →</span>
-      </div>
-    </a>
+    <div class="feature-list">
+      <a class="feature-card has-media" href="https://zyphullen.github.io/echoatlas/" target="_blank" rel="noopener">
+        <div class="feature-media">
+          <img src="assets/echoatlas-card.png" alt="Echo Atlas" width="1200" height="630" decoding="async" />
+        </div>
+        <div class="feature-body">
+          <span class="badge">Interactive</span>
+          <h3>Echo Atlas</h3>
+          <p>Free interactive maps of the universe, maths, life and Earth.</p>
+          <span class="cta">Explore here →</span>
+        </div>
+      </a>
+      <a class="feature-card has-media" href="https://zyphullen.github.io/from-nothing-to-us/" target="_blank" rel="noopener">
+        <div class="feature-media">
+          <img src="assets/from-nothing-to-us-card.png" alt="From Nothing to Us" width="1200" height="630" decoding="async" />
+        </div>
+        <div class="feature-body">
+          <span class="badge">Interactive</span>
+          <h3>From Nothing to Us</h3>
+          <p>A cosmic map of emergence — from void to us.</p>
+          <span class="cta">Enter the map →</span>
+        </div>
+      </a>
+    </div>
   </section>
 
   <!-- GAMES -->
   <section id="games" class="section">
     <h2 class="section-title">Games</h2>
-    <div class="card-grid">
+    <a class="feature-card has-media" href="https://zyphullen.github.io/phoenix-storm/" target="_blank" rel="noopener">
+      <div class="feature-media">
+        <img class="media-top" src="assets/phoenix-storm-card.png" alt="Phoenix Storm" width="1052" height="630" decoding="async" />
+      </div>
+      <div class="feature-body">
+        <span class="badge badge-game">Game</span>
+        <h3>Phoenix Storm</h3>
+        <p>A free bullet-hell survivor in a painted anime style. Play in your browser, on PC or phone.</p>
+        <span class="cta">Play here →</span>
+      </div>
+    </a>
+    <div class="card-grid coming">
       <article class="card game-card">
         <div class="card-icon" aria-hidden="true">🪐</div>
         <span class="soon">Coming soon</span>
@@ -124,12 +645,8 @@
     <h2 class="section-title">Ideas</h2>
     <div class="card-grid ideas">
       <article class="card idea-card">
-        <div class="card-icon" aria-hidden="true">🌳</div>
-        <h3>Global Bounty Tree</h3>
-        <p>AI-mapped tree of open problems. Solved branches glow. Open ones carry bounties.</p>
-      </article>
-      <article class="card idea-card">
         <div class="card-icon" aria-hidden="true">🧸</div>
+        <span class="soon">Stage 0</span>
         <h3>AI companion plush</h3>
         <p>Supervised tap-to-talk AI companion. Soft, portable, always listening when asked.</p>
       </article>
@@ -151,6 +668,98 @@
     <p class="footer-tag">Nothing is impossible.</p>
   </footer>
 
-  <script src="main.js"></script>
+  <script>
+/* Starfield + subtle sacred geometry pulse */
+(function () {
+  const canvas = document.getElementById("stars");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  let w, h, stars, dpr;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    spawn();
+  }
+
+  function spawn() {
+    const count = Math.min(180, Math.floor((w * h) / 9000));
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.4 + 0.2,
+      a: Math.random(),
+      s: Math.random() * 0.015 + 0.003,
+      hue: Math.random() > 0.85 ? (Math.random() > 0.5 ? 170 : 45) : 0,
+    }));
+  }
+
+  let t = 0;
+  function draw() {
+    t += 1;
+    ctx.clearRect(0, 0, w, h);
+
+    const cx = w * 0.5;
+    const cy = h * 0.42;
+    const pulse = 0.5 + 0.5 * Math.sin(t * 0.008);
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(t * 0.0004);
+    for (let ring = 1; ring <= 3; ring++) {
+      const R = 80 + ring * 70;
+      ctx.beginPath();
+      for (let i = 0; i <= 6; i++) {
+        const ang = (i / 6) * Math.PI * 2 - Math.PI / 2;
+        const x = Math.cos(ang) * R;
+        const y = Math.sin(ang) * R;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `rgba(0, 229, 192, ${0.04 + pulse * 0.03})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 0.035 + pulse * 0.02;
+    ctx.strokeStyle = "#ffd700";
+    for (let i = 0; i < 6; i++) {
+      const ang = (i / 6) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.arc(Math.cos(ang) * 55, Math.sin(ang) * 55, 55, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.arc(0, 0, 55, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+
+    for (const s of stars) {
+      s.a += s.s;
+      if (s.a > 1 || s.a < 0) s.s *= -1;
+      const alpha = 0.25 + s.a * 0.75;
+      if (s.hue === 170) {
+        ctx.fillStyle = `rgba(0, 229, 192, ${alpha})`;
+      } else if (s.hue === 45) {
+        ctx.fillStyle = `rgba(255, 215, 0, ${alpha})`;
+      } else {
+        ctx.fillStyle = `rgba(230, 230, 255, ${alpha})`;
+      }
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+  draw();
+})();
+  </script>
 </body>
 </html>
